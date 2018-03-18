@@ -35,6 +35,9 @@
 
 <script type="text/javascript">
 
+    /**
+     * Map monitor names to the map points they should represent.
+     */
     var monitorMap = {
         'APAC': ['JP_B'],
         'US': ['US_C_A', 'US_W_B'],
@@ -72,12 +75,12 @@
                     //document.getElementById('time').innerText = r.last;
                     document.getElementById('time').innerText = new Date().toLocaleString();
 
-                    document.getElementById('JP_B').setAttribute('class', '');
-                    document.getElementById('US_W_B').setAttribute('class', '');
-                    document.getElementById('US_C_A').setAttribute('class', '');
-                    document.getElementById('EU_W_A').setAttribute('class', '');
-
                     r.monitors.forEach(function(m){
+                        // Reset class before updating
+                        monitorMap[m.name].forEach(function(v){
+                            document.getElementById(v).setAttribute('class', '');
+                        });
+                        // Update
                         update(m.name, m.status);
                     });
                 } else {
