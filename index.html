@@ -1,0 +1,101 @@
+<!--TEMPLATE mustache-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{🎨.title}}</title>
+
+    <link itemprop="content-security-policy" data-connect-self="true">
+
+    {{% svg /_svg/ as svg }}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/style.scss" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="wrap">
+<div id="section">
+    <div id="logo">
+        <span>{{> svg-logo_font_w }}</span>
+        <span id="ext">{{🎨.ext}}</span>
+    </div>
+
+    <div id="status"> </div>
+
+    <div id="time"> </div>
+</div>
+</div>
+
+<div id="map">
+{{> svg-world_map }}
+</div>
+
+<script type="text/javascript">
+
+    var monitorMap = {
+        'APAC': ['JP_B'],
+        'US': ['US_C_A', 'US_W_B'],
+        'EU': ['EU_W_A']
+    };
+
+    function update(monitorName, status) {
+        var statusClass = 'trouble';
+        if (status == 'up') {
+            statusClass = 'good';
+        } else if (status == 'down') {
+            statusClass = 'down';
+        }
+        monitorMap[monitorName].forEach(function(v){
+            document.getElementById(v).setAttribute('class', statusClass);
+        });
+    }
+
+    function poll(){
+        document.getElementById('status').setAttribute('class', '');
+        document.getElementById('time').innerHTML = '&nbsp;';
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'api/status');
+        xhr.onreadystatechange = function () {
+            var DONE = 4; // readyState 4 means the request is done.
+            var OK = 200; // status 200 is a successful return.
+            if (xhr.readyState === DONE) {
+                if (xhr.status === OK) {
+                    var r = JSON.parse(xhr.responseText);
+
+                    document.getElementById('status').setAttribute('class', r.status);
+
+                    // safari parsing issues with no colon in timezone..
+                    //document.getElementById('time').innerText = r.last;
+                    document.getElementById('time').innerText = new Date().toLocaleString();
+
+                    document.getElementById('JP_B').setAttribute('class', '');
+                    document.getElementById('US_W_B').setAttribute('class', '');
+                    document.getElementById('US_C_A').setAttribute('class', '');
+                    document.getElementById('EU_W_A').setAttribute('class', '');
+
+                    r.monitors.forEach(function(m){
+                        update(m.name, m.status);
+                    });
+                } else {
+                    document.getElementById('status').setAttribute('class', 'error');
+                }
+            } else {
+                document.getElementById('status').setAttribute('class', 'error');
+                console.log('Error: ' + xhr.status); // An error occurred during the request.
+            }
+        };
+        xhr.send(null);
+    }
+
+    setInterval(poll, 45000);
+
+    poll();
+
+</script>
+
+</body>
+</html>
