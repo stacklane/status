@@ -32,6 +32,7 @@ try {
     let out = {status: overall, monitors: [], last: ''};
 
     let lastTime = '';
+
     monitors.forEach((monitor)=>{
         out.monitors.push({
             name: monitor.name,
