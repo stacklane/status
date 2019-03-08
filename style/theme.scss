@@ -1,0 +1,125 @@
+@import "/style/variables";
+
+////////////
+
+@import "/bulma/utilities/all";
+
+@import "/bulma/base/_all";
+
+@import "/bulma/elements/box";
+@import "/bulma/elements/button";
+@import "/bulma/elements/container";
+@import "/bulma/elements/icon";
+@import "/bulma/elements/title";
+@import "/bulma/elements/tag";
+
+@import "/bulma/components/navbar";
+@import "/bulma/grid/columns";
+
+////////////
+
+@import "/🎨";
+@import "/style/svg-icon";
+
+////////////
+
+.navbar{
+  border-bottom: $boxed-border-lighter;
+}
+.navbar-brand .logo svg{
+  height: 1.25rem;
+}
+
+main {
+  margin-top: $navbar-total-height;
+  background: $main-bg-color;
+
+  padding-top: 4rem;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  pre[class*="language-"] {
+    @include is-boxed;
+  }
+}
+
+@include tablet{
+  padding-left: 0rem;
+  padding-right: 0rem;
+}
+
+main + footer{
+  margin-top: 10rem !important;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  border-top: $boxed-border;
+  text-align: right;
+  font-size: .8rem;
+}
+
+#time{
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-left: 3.25rem;
+}
+
+#status{
+  margin-bottom: 4rem;
+}
+
+#status .icon {
+  display: none;
+  width: 3rem;
+  height: 3rem;
+  vertical-align:bottom;
+}
+#status-text{
+  display:inline-flex;
+  font-size: 2rem;
+  font-weight: 400;
+}
+#status.up{
+  .icon.has-text-success{
+    display: inline-flex;
+  }
+  #status-text:after {
+    content: $status-up;
+  }
+}
+#status.down{
+  .icon.has-text-danger{
+    display: inline-flex;
+  }
+  #status-text:after  {
+    content: $status-down;
+  }
+}
+#status.maintenance{
+  .icon.has-text-warning{
+    display: inline-flex;
+  }
+  #status-text:after  {
+    content: $status-maint;
+  }
+}
+#status.partial{
+  .icon.has-text-warning{
+    display: inline-flex;
+  }
+  #status-text:after  {
+    content: $status-partial;
+  }
+}
+#status.error{
+  .icon.has-text-warning{
+    display: inline-flex;
+  }
+  #status-text:after  {
+    content: $status-error;
+  }
+}
+
+
+
+

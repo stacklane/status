@@ -1,1 +1,1 @@
-# web-status
+# https://stacklane.com/status/

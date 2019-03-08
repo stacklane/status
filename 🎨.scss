@@ -1,18 +1,16 @@
 
-/**
- *
- */
 $title: 'Stacklane Status';
 $website: 'https://stacklane.com';
 
 $ext: 'status';
 
-$status-up: 'Fully Operational';
-$status-down: 'Down';
+$status-up: 'All Systems Operational';
+$status-down: 'Systems Down';
 $status-partial: 'Partially Unavailable';
 $status-maint: 'Scheduled Maintenance';
 $status-error: 'Error Checking Status';
 
 $updating: 'Updating';
 
-//$site24x7-groupId = 'groupId';
+$startYear: '2017';
+$year: '2019';

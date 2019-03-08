@@ -4,56 +4,101 @@
 <head>
     <title>{{🎨.title}}</title>
 
-    <link itemprop="content-security-policy" data-connect-self="true">
-
-    {{% svg /_svg/ as svg }}
+    {{% svg /_logos/ as logo }}
+    {{% svg /_icons/ as icon }}
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="/style.scss" rel="stylesheet">
+    <link href="/style/theme.scss" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
 </head>
 
 <body>
 
-<div id="wrap">
-<div id="section">
-    <div id="logo">
-        <a href="{{🎨.website}}">{{> svg-logo_font_w }}</a>
-        <span id="ext">{{🎨.ext}}</span>
+<nav id="nav" class="navbar is-spaced is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="https://stacklane.com" class="navbar-item logo">{{>logo-sl_full}}</a>
+            <span class="has-text-weight-semibold navbar-item">Status</span>
+        </div>
     </div>
+</nav>
 
-    <div id="status"> </div>
+<main>
+    <div class="container">
+        <div id="status" class="up"> <!-- optimistic for initial page load / check -->
+            <div class="icon has-text-success">{{>icon-check}}</div>
+            <div class="icon has-text-danger">{{>icon-error}}</div>
+            <div class="icon has-text-warning">{{>icon-warning}}</div>
 
-    <div id="time"> </div>
-</div>
-</div>
+            <span id="status-text"></span>
 
-<div id="map">
-{{> svg-world_map }}
-</div>
+            <div id="time"> </div>
+        </div>
+
+        <div id="components">
+            <div class="box">
+                <div class="columns is-mobile">
+                    <div class="column">
+                        <div class="title is-size-6">United States</div>
+                        <div class="subtitle is-size-7">Endpoint delivery for US-1, US-2, and US data storage.</div>
+                    </div>
+                    <div id="component-us" class="column has-text-right"></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="columns is-mobile">
+                    <div class="column">
+                        <div class="title is-size-6">European Union</div>
+                        <div class="subtitle is-size-7">Endpoint delivery for EU-1, and EU data storage.</div>
+                    </div>
+                    <div id="component-eu" class="column has-text-right"></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="columns is-mobile">
+                    <div class="column">
+                        <div class="title is-size-6">Content Delivery Network</div>
+                        <div class="subtitle is-size-7">Over 80 sites for asset delivery.</div>
+                    </div>
+                    <div id="component-cdn" class="column has-text-right has-text-success">Operational</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="container">
+    &copy; Stacklane, Inc. {{🎨.startYear}}-{{🎨.year}}. All rights reserved.
+</footer>
 
 <script type="text/javascript">
-
-    /**
-     * Map monitor names to the map points they should represent.
-     */
     var monitorMap = {
-        'APAC': ['JP_B'],
-        'US': ['US_C_A', 'US_W_B'],
-        'EU': ['EU_W_A']
+        'US': "component-us",
+        'EU': "component-eu"
     };
 
     function update(monitorName, status) {
-        var statusClass = 'trouble';
-        if (status == 'up') {
-            statusClass = 'good';
-        } else if (status == 'down') {
-            statusClass = 'down';
+        var id = monitorMap[monitorName];
+        if (id){
+            var el = document.getElementById(id);
+            if (el){
+                el.classList.remove('has-text-success', 'has-text-danger', 'has-text-warning'); // reset
+                if (status == 'up') {
+                    el.classList.add('has-text-success');
+                    el.innerText='Operational';
+                } else if (status == 'down') {
+                    el.classList.add('has-text-danger');
+                    el.innerText='Down';
+                } else {
+                    el.classList.add('has-text-warning');
+                    el.innerText='Issue';
+                }
+            }
         }
-        monitorMap[monitorName].forEach(function(v){
-            document.getElementById(v).setAttribute('class', statusClass);
-        });
     }
 
     function poll(){
@@ -73,14 +118,9 @@
 
                     // safari parsing issues with no colon in timezone..
                     //document.getElementById('time').innerText = r.last;
-                    document.getElementById('time').innerText = new Date().toLocaleString();
+                    document.getElementById('time').innerText = 'Last updated on ' + new Date().toLocaleString();
 
                     r.monitors.forEach(function(m){
-                        // Reset class before updating
-                        monitorMap[m.name].forEach(function(v){
-                            document.getElementById(v).setAttribute('class', '');
-                        });
-                        // Update
                         update(m.name, m.status);
                     });
                 } else {

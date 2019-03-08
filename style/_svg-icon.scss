@@ -1,0 +1,30 @@
+@import "/style/variables";
+
+/**
+ * .icon > svg .has-text-X variations
+ *
+ * Adapted from bulma logic for .has-text-X
+ */
+
+@each $name, $shade in $shades {
+  .has-text-#{$name} .icon > svg, .has-text-#{$name}.icon > svg{
+    fill: $shade !important;
+  }
+}
+
+@each $name, $pair in $colors { //
+  $color: nth($pair, 1);
+
+  .has-text-#{$name} .icon > svg, .has-text-#{$name}.icon > svg{
+    fill: $color !important;
+  }
+}
+
+a:hover .has-text-link.icon > svg{
+  fill: $link-hover !important;
+}
+
+.icon > svg{
+  width: 100%;
+  height: 100%;
+}
