@@ -28,6 +28,8 @@
 }
 .navbar-brand .logo svg{
   height: 1.25rem;
+  overflow:visible;
+  margin-bottom: 1px;
 }
 
 main {
@@ -53,6 +55,7 @@ main + footer{
   margin-top: 10rem !important;
   padding-top: 1rem;
   padding-bottom: 2rem;
+  padding-right: 1rem;
   border-top: $boxed-border;
   text-align: right;
   font-size: .8rem;
@@ -61,7 +64,7 @@ main + footer{
 #time{
   font-weight: 500;
   margin-top: 1rem;
-  margin-left: 3.25rem;
+  margin-left: 2.25rem;
 }
 
 #status{
@@ -70,15 +73,32 @@ main + footer{
 
 #status .icon {
   display: none;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   vertical-align:bottom;
 }
+
 #status-text{
   display:inline-flex;
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: 400;
+  white-space: nowrap;
 }
+
+@include tablet{
+  #status .icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  #status-text{
+    font-size: 2rem;
+  }
+
+  #time{
+    margin-left: 3.25rem;
+  }
+}
+
 #status.up{
   .icon.has-text-success{
     display: inline-flex;
