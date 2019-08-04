@@ -50,7 +50,7 @@ try {
 
 } catch (e){
 
-    ({status:'error', message: e.message, code: e.status});
+    ({status:'error', message: e.message + '', code: e.status + ''});
 
 }
 
