@@ -4,7 +4,7 @@
 
 @import "/bulma/utilities/all";
 
-@import "/bulma/base/_all";
+@import "/bulma/base/all";
 
 @import "/bulma/elements/box";
 @import "/bulma/elements/button";
@@ -27,23 +27,17 @@
   border-bottom: $boxed-border-lighter;
 }
 .navbar-brand .logo svg{
-  height: 1.25rem;
-  overflow:visible;
-  margin-bottom: 1px;
+  margin-top: 1px;
+  height: 1.5rem;
+  fill: $black;
 }
 
 main {
   margin-top: $navbar-total-height;
-  background: $main-bg-color;
 
   padding-top: 4rem;
-
   padding-left: 1rem;
   padding-right: 1rem;
-
-  pre[class*="language-"] {
-    @include is-boxed;
-  }
 }
 
 @include tablet{
