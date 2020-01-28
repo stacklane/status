@@ -24,7 +24,7 @@
 ////////////
 
 .navbar{
-  border-bottom: $boxed-border-lighter;
+  border-bottom: $box-border;
 }
 .navbar-brand .logo svg{
   margin-top: 1px;
@@ -33,7 +33,7 @@
 }
 
 main {
-  margin-top: $navbar-total-height;
+  //margin-top: $navbar-total-height;
 
   padding-top: 4rem;
   padding-left: 1rem;
@@ -50,7 +50,7 @@ main + footer{
   padding-top: 1rem;
   padding-bottom: 2rem;
   padding-right: 1rem;
-  border-top: $boxed-border;
+  border-top: $box-border;
   text-align: right;
   font-size: .8rem;
 }

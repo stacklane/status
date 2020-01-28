@@ -1,7 +1,5 @@
 /**
- * Branding
- *
- * Bulma uses the grey-, black-, white- variations to drive many other settings.
+ * Literals
  */
 
 $blue: #0c84cd;
@@ -26,13 +24,17 @@ $grey-light: #aab8c2;
 $grey-lighter: #E1E8ED;
 $grey-lightest: #F5F8FA;
 
-$shadow-color-for-body-background-only: rgba(#343d45 /* 25% darker than $grey-dark */, 0.1);
-
-///
+/**
+ * Scheme
+ */
 
 $scheme-main: $white-ter;
 $scheme-main-ter: $white-ter;
 $scheme-main-bis: $white-bis;
+
+$scheme-invert: $black;
+$scheme-invert-bis: $black-bis;
+$scheme-invert-ter: $black-ter;
 
 /**
  * Imports
@@ -42,52 +44,20 @@ $scheme-main-bis: $white-bis;
 @import "/bulma/utilities/functions";
 @import "/bulma/utilities/derived-variables";
 
-
-/**
- * More
- */
-
-$article-block-spacing: 1rem;
-
-$shadow-for-bg: $shadow-color-for-body-background-only;
-
-$zindex-sticky: 39;
-
-$boxed-radius: $radius;
-$boxed-border: 1px solid rgba(0,0,0,.1);
-$boxed-border-lighter: 1px solid rgba(0,0,0,.05);
-$boxed-background: white !important;
-$boxed-shadow:  0px 0px 15px 0px rgba(0, 0, 0, 0.05);
-
-@mixin is-boxed {
-  box-shadow: $boxed-shadow;
-  border-radius: $boxed-radius;
-  border: $boxed-border;
-  background: $boxed-background;
-}
-
 /**
  * Overrides
  */
 
-$size-7: .8rem;
+$box-background-color: $white;
+$box-border: 1px solid rgba($black,.1);
+$box-radius: $radius;
+.box{ border: $box-border; }
 
-$navbar-z: $zindex-sticky + 1;
-$navbar-fixed-z: $navbar-z;
-$navbar-height: 3.25rem;
-$navbar-padding-vertical: 1rem;
-$navbar-padding-horizontal: 1rem;
-$navbar-breakpoint: 0px;
-$navbar-total-height: $navbar-height + $navbar-padding-vertical + $navbar-padding-vertical;
+$size-7: .8rem;
 
 $body-size: 15px;
 
 $table-background-color: transparent;
-
-$box-radius: $boxed-radius;
-$box-shadow: $boxed-shadow;
-$box-background-color: $boxed-background;
-.box{ border: $boxed-border; }
 
 $code-background: inherit;
 $code-size: inherit;
