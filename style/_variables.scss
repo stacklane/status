@@ -48,9 +48,10 @@ $scheme-invert-ter: $black-ter;
  * Overrides
  */
 
+$box-radius: $radius;
+$box-shadow: 0px 0px 15px 0px rgba($black, 0.05);
 $box-background-color: $white;
 $box-border: 1px solid rgba($black,.1);
-$box-radius: $radius;
 .box{ border: $box-border; }
 
 $size-7: .8rem;
